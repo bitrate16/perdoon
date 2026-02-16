@@ -24,7 +24,7 @@ go build -o perdoon
 Install using root:
 
 ```bash
-sudo cp perdoon /usr/bin/perdoon
+sudo cp -f perdoon /usr/bin/perdoon
 ```
 
 
