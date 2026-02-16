@@ -15,11 +15,13 @@ func (pr *ValueRange) String() string {
 
 type TCPConfig struct {
 	Ports     []*ValueRange `yaml:"ports"`
+	Exclude   []int         `yaml:"exclude"`
 	ChunkSize int           `yaml:"chunk-size"`
 }
 
 type UDPConfig struct {
 	Ports     []*ValueRange `yaml:"ports"`
+	Exclude   []int         `yaml:"exclude"`
 	ChunkSize int           `yaml:"chunk-size"`
 }
 
@@ -65,6 +67,9 @@ func defaultConfig() *Config {
 					Start: 1000,
 					End:   2000,
 				},
+			},
+			Exclude: []int{
+				1500,
 			},
 			ChunkSize: 1024,
 		},

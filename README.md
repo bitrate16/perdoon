@@ -57,6 +57,10 @@ response:
 strategy: random
 ```
 
+## Port range
+
+Port ranges for each prtocol are defined in `udp.ports` and `tcp.ports`. You can also define a wide range of ports and exclude vcertain ports with `udp.exclude` and `tcp.exclude` sections.
+
 
 ## Strategies
 

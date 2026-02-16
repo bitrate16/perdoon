@@ -76,10 +76,27 @@ func main() {
 	udpServers := make(map[int]server.ServerController)
 	tcpServers := make(map[int]server.ServerController)
 
+	// Exclude ports
+	udpExclude := make(map[int]struct{})
+	tcpExclude := make(map[int]struct{})
+
+	// Build exclude maps
+	for _, port := range state.Config.UDP.Exclude {
+		udpExclude[port] = struct{}{}
+	}
+	for _, port := range state.Config.TCP.Exclude {
+		tcpExclude[port] = struct{}{}
+	}
+
 	// UDP Servers
 	for _, portRange := range state.Config.UDP.Ports {
 		for port := portRange.Start; port <= portRange.End; port++ {
 			if port <= 0 || port >= 65535 {
+				continue
+			}
+
+			// Skip excluded
+			if _, skip := udpExclude[port]; skip {
 				continue
 			}
 
@@ -107,6 +124,11 @@ func main() {
 	for _, portRange := range state.Config.TCP.Ports {
 		for port := portRange.Start; port <= portRange.End; port++ {
 			if port <= 0 || port >= 65535 {
+				continue
+			}
+
+			// Skip excluded
+			if _, skip := tcpExclude[port]; skip {
 				continue
 			}
 
