@@ -47,8 +47,6 @@ func main() {
 		return
 	}
 
-	fmt.Println(state.Config)
-
 	// Replayer init
 	if replayMaker, ok := replays.REGISTRY[state.Config.Strategy]; ok {
 		state.Replay = replayMaker(state)
