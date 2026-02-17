@@ -55,7 +55,14 @@ response:
     - 512-65536
   bytes: 3a33
 strategy: random
+debug: false
 ```
+
+
+## Debug
+
+Enabling debug will output events into console instead of database.
+
 
 ## Port range
 
