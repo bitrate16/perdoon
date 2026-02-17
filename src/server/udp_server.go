@@ -133,7 +133,7 @@ func (s *UDPServer) Start() error {
 					clientAddr.Port,
 					chainId,
 					"reponse",
-					dataSize,
+					len(response),
 					response,
 				))
 			} else {
@@ -144,7 +144,7 @@ func (s *UDPServer) Start() error {
 					clientAddr.Port,
 					chainId,
 					"reponse",
-					dataSize,
+					len(response),
 					nil,
 				))
 			}

@@ -184,7 +184,7 @@ func (s *TCPServer) Start() error {
 							clientAddr.Port,
 							chainId,
 							"reponse",
-							dataSize,
+							len(response),
 							response,
 						))
 					} else {
@@ -195,7 +195,7 @@ func (s *TCPServer) Start() error {
 							clientAddr.Port,
 							chainId,
 							"reponse",
-							dataSize,
+							len(response),
 							nil,
 						))
 					}
