@@ -150,3 +150,4 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ## TODO
 
 - Support TCP reply generation using `io.Writer` instead of buffer generation to reduce memory usage.
+- Use single-threaded server handlers and dispatcher queue to process connections and requests on N workers instead of spawning thousands of goroutines.
