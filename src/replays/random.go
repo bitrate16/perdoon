@@ -4,17 +4,23 @@ import (
 	"log"
 	"math/rand"
 	"net"
+	"perdoon/src/config"
 	"perdoon/src/replay"
 	"perdoon/src/state"
 )
 
 type Random struct {
-	state *state.State
+	state  *state.State
+	config *config.ResponseConfig
 }
 
-func NewRandom(state *state.State) replay.Replay {
+func NewRandom(
+	state *state.State,
+	config *config.ResponseConfig,
+) replay.Replay {
 	return &Random{
-		state: state,
+		state:  state,
+		config: config,
 	}
 }
 
@@ -29,7 +35,7 @@ func (e *Random) Replay(
 	clientIP net.IP,
 	clientPort int,
 ) []byte {
-	size := SelectRandomFromRanges(e.state.Config.Response.Sizes)
+	size := SelectRandomFromRanges(e.config.Sizes)
 	if size <= 0 {
 		return []byte{}
 	}

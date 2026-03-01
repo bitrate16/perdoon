@@ -47,16 +47,29 @@ func main() {
 		return
 	}
 
-	// Replayer init
-	if replayMaker, ok := replays.REGISTRY[state.Config.Strategy]; ok {
-		state.Replay = replayMaker(state)
-		err := state.Replay.Init()
+	// Replayer init for TCP
+	if tcpReplayMaker, ok := replays.REGISTRY[state.Config.TCP.Response.Strategy]; ok {
+		state.TCPReplay = tcpReplayMaker(state, state.Config.TCP.Response)
+		err := state.TCPReplay.Init()
 		if err != nil {
-			log.Printf("Strategy Init failed: %s", err)
+			log.Printf("TCP strategy Init failed: %s", err)
 			return
 		}
 	} else {
-		log.Printf("Strategy: %s not supported", state.Config.Strategy)
+		log.Printf("TCP strategy: %s not supported", state.Config.TCP.Response.Strategy)
+		os.Exit(1)
+	}
+
+	// Replayer init for UDP
+	if udpReplayMaker, ok := replays.REGISTRY[state.Config.UDP.Response.Strategy]; ok {
+		state.UDPReplay = udpReplayMaker(state, state.Config.UDP.Response)
+		err := state.UDPReplay.Init()
+		if err != nil {
+			log.Printf("UDP strategy Init failed: %s", err)
+			return
+		}
+	} else {
+		log.Printf("UDP strategy: %s not supported", state.Config.UDP.Response.Strategy)
 		os.Exit(1)
 	}
 

@@ -37,24 +37,31 @@ tcp:
   ports:
     - 1-65535
   chunk-size: 1024
+  response:
+  sizes:
+      - 1-16
+      - 64-128
+      - 512-65536
+  bytes: 3a33
+  strategy: random
 udp:
   ports:
     - 1-1000
     - 2000-15000
   chunk-size: 1024
+  response:
+  sizes:
+      - 1-16
+      - 64-128
+      - 512-65536
+  bytes: 3a33
+  strategy: random
 database:
   path: perdoon.db
   table: perdoon
   record:
     request-payload: true
     response-payload: true
-response:
-  sizes:
-    - 1-16
-    - 64-128
-    - 512-65536
-  bytes: 3a33
-strategy: random
 debug: false
 ```
 
@@ -139,3 +146,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
+
+## TODO
+
+- Support TCP reply generation using `io.Writer` instead of buffer generation to reduce memory usage.

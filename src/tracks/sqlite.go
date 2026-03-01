@@ -129,10 +129,17 @@ func (s *SQLite) Event(
 
 	timestamp := time.Now().UnixNano()
 
+	var strategy string
+	if protocol == "tcp" {
+		strategy = s.state.Config.TCP.Response.Strategy
+	} else {
+		strategy = s.state.Config.UDP.Response.Strategy
+	}
+
 	_, err := s.insertStatement.Exec(
 		s.state.Session,
 		timestamp,
-		s.state.Config.Strategy,
+		strategy,
 		protocol,
 		server_port,
 		client_ip.String(),

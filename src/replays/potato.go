@@ -2,19 +2,25 @@ package replays
 
 import (
 	"net"
+	"perdoon/src/config"
 	"perdoon/src/replay"
 	"perdoon/src/state"
 )
 
 type Potato struct {
-	state *state.State
+	state  *state.State
+	config *config.ResponseConfig
 }
 
 const POTATO = "potato"
 
-func NewPotato(state *state.State) replay.Replay {
+func NewPotato(
+	state *state.State,
+	config *config.ResponseConfig,
+) replay.Replay {
 	return &Potato{
-		state: state,
+		state:  state,
+		config: config,
 	}
 }
 
@@ -29,7 +35,7 @@ func (e *Potato) Replay(
 	clientIP net.IP,
 	clientPort int,
 ) []byte {
-	size := SelectRandomFromRanges(e.state.Config.Response.Sizes)
+	size := SelectRandomFromRanges(e.config.Sizes)
 	if size <= 0 {
 		return []byte{}
 	}

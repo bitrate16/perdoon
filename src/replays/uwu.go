@@ -2,19 +2,25 @@ package replays
 
 import (
 	"net"
+	"perdoon/src/config"
 	"perdoon/src/replay"
 	"perdoon/src/state"
 )
 
 type Uwu struct {
-	state *state.State
+	state  *state.State
+	config *config.ResponseConfig
 }
 
 const QT = ":3"
 
-func NewQt(state *state.State) replay.Replay {
+func NewQt(
+	state *state.State,
+	config *config.ResponseConfig,
+) replay.Replay {
 	return &Uwu{
-		state: state,
+		state:  state,
+		config: config,
 	}
 }
 
@@ -29,7 +35,7 @@ func (e *Uwu) Replay(
 	clientIP net.IP,
 	clientPort int,
 ) []byte {
-	size := SelectRandomFromRanges(e.state.Config.Response.Sizes)
+	size := SelectRandomFromRanges(e.config.Sizes)
 	if size <= 0 {
 		return []byte{}
 	}

@@ -1,11 +1,12 @@
 package replays
 
 import (
+	"perdoon/src/config"
 	"perdoon/src/replay"
 	"perdoon/src/state"
 )
 
-type ReplayMaker func(state *state.State) replay.Replay
+type ReplayMaker func(state *state.State, config *config.ResponseConfig) replay.Replay
 
 var REGISTRY map[string]ReplayMaker
 

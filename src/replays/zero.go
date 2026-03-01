@@ -2,17 +2,23 @@ package replays
 
 import (
 	"net"
+	"perdoon/src/config"
 	"perdoon/src/replay"
 	"perdoon/src/state"
 )
 
 type Zero struct {
-	state *state.State
+	state  *state.State
+	config *config.ResponseConfig
 }
 
-func NewZero(state *state.State) replay.Replay {
+func NewZero(
+	state *state.State,
+	config *config.ResponseConfig,
+) replay.Replay {
 	return &Zero{
-		state: state,
+		state:  state,
+		config: config,
 	}
 }
 
@@ -27,7 +33,7 @@ func (e *Zero) Replay(
 	clientIP net.IP,
 	clientPort int,
 ) []byte {
-	size := SelectRandomFromRanges(e.state.Config.Response.Sizes)
+	size := SelectRandomFromRanges(e.config.Sizes)
 	if size <= 0 {
 		return []byte{}
 	}

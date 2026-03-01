@@ -116,7 +116,7 @@ func (s *UDPServer) Start() error {
 				))
 			}
 
-			response := s.state.Replay.Replay(
+			response := s.state.UDPReplay.Replay(
 				buffer[:dataSize],
 				"udp",
 				s.port,

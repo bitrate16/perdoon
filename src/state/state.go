@@ -9,8 +9,9 @@ import (
 )
 
 type State struct {
-	Config  *config.Config
-	Track   track.Track
-	Replay  replay.Replay
-	Session uuid.UUID
+	Config    *config.Config
+	Track     track.Track
+	TCPReplay replay.Replay
+	UDPReplay replay.Replay
+	Session   uuid.UUID
 }

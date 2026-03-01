@@ -167,7 +167,7 @@ func (s *TCPServer) Start() error {
 						))
 					}
 
-					response := s.state.Replay.Replay(
+					response := s.state.TCPReplay.Replay(
 						buffer[:dataSize],
 						"tcp",
 						s.port,
